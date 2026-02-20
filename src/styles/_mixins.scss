@@ -1,0 +1,24 @@
+@use 'variables' as *;
+
+@mixin method-badges {
+  @each $method, $colors in $method-colors {
+    &.#{$method} {
+      background: nth($colors, 2);
+      color: nth($colors, 1);
+    }
+  }
+}
+
+@mixin bordered-block {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+@mixin code-inline {
+  background: var(--code-bg);
+  padding: 0.15rem 0.4rem;
+  border-radius: 5px;
+  font-family: $font-mono;
+}

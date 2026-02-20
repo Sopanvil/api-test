@@ -1,0 +1,16 @@
+// Шрифты
+$font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+// Цвета HTTP-методов
+$method-colors: (
+  'get': (#22c55e, rgba(34, 197, 94, 0.2)),
+  'post': (#3b82f6, rgba(59, 130, 246, 0.2)),
+  'put': (#f97316, rgba(249, 115, 22, 0.2)),
+  'delete': (#ef4444, rgba(239, 68, 68, 0.2)),
+  'patch': (#a855f7, rgba(168, 85, 247, 0.2))
+);
+
+// Размеры
+$sidebar-width: 380px;
+$header-height: 64px;

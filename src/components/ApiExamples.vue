@@ -26,55 +26,55 @@ defineProps<{
   </aside>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
 .examples {
-  width: 380px;
-  min-width: 380px;
+  width: $sidebar-width;
+  min-width: $sidebar-width;
   flex-shrink: 0;
   background: var(--examples-bg);
   border-left: 1px solid var(--border-color);
-}
 
-.examples-sticky {
-  padding: 2rem 1.5rem;
+  &-sticky {
+    padding: 2rem 1.5rem;
+  }
 }
 
 .example-block {
   margin-bottom: 2rem;
-}
 
-.example-block:last-child {
-  margin-bottom: 0;
-}
+  &:last-child {
+    margin-bottom: 0;
+  }
 
-.example-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin: 0 0 0.75rem;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
+  .example-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
 }
 
 .code-block {
+  @include bordered-block;
   background: var(--code-block-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
 
-.code-block pre {
-  margin: 0;
-  padding: 1.25rem 1.5rem;
-  overflow-x: auto;
-  font-size: 0.8rem;
-  line-height: 1.6;
-}
+  pre {
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
 
-.code-block code {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-  color: var(--code-color);
-  white-space: pre;
+  code {
+    font-family: $font-mono;
+    color: var(--code-color);
+    white-space: pre;
+  }
 }
 
 .no-example {

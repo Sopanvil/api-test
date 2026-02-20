@@ -41,23 +41,40 @@ function selectEndpoint(id: string) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .app {
   height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
 
-.app-header {
-  height: 64px;
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  padding: 0 2rem;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
+  &-header {
+    height: 64px;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  &-body {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &-main {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
 }
 
 .logo {
@@ -66,22 +83,5 @@ function selectEndpoint(id: string) {
   margin: 0;
   color: var(--text-primary);
   letter-spacing: -0.02em;
-}
-
-.app-body {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-}
-
-.app-main {
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  overflow-y: auto;
 }
 </style>

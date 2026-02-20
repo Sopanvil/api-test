@@ -33,21 +33,27 @@ function getResponseClass(code: number): string {
             :key="field.name"
             class="schema-field"
           >
-            <div class="schema-field-main">
-              <code class="field-name">{{ field.name }}</code>
-              <span v-if="field.required" class="required">*</span>
-              <span class="field-type">{{ field.type }}</span>
+            <div class="field-row">
+              <span class="field-name-wrap">
+                <code class="field-name">{{ field.name }}</code>
+                <span v-if="field.required" class="required">*</span>
+              </span>
+              <div class="field-meta">
+                <span class="field-type">{{ field.type }}</span>
+                <p class="field-desc">{{ field.description }}</p>
+              </div>
             </div>
-            <p class="field-desc">{{ field.description }}</p>
             <div v-if="field.nested?.length" class="schema-nested">
               <div
                 v-for="n in field.nested"
                 :key="n.name"
                 class="schema-nested-field"
               >
-                <code>{{ n.name }}</code>
-                <span class="field-type">{{ n.type }}</span>
-                <span class="field-desc-inline">— {{ n.description }}</span>
+                <span class="field-name-wrap"><code>{{ n.name }}</code></span>
+                <div class="field-meta">
+                  <span class="field-type">{{ n.type }}</span>
+                  <p class="field-desc">{{ n.description }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -81,20 +87,26 @@ function getResponseClass(code: number): string {
             :key="field.name"
             class="schema-field"
           >
-            <div class="schema-field-main">
-              <code class="field-name">{{ field.name }}</code>
-              <span class="field-type">{{ field.type }}</span>
+            <div class="field-row">
+              <span class="field-name-wrap">
+                <code class="field-name">{{ field.name }}</code>
+              </span>
+              <div class="field-meta">
+                <span class="field-type">{{ field.type }}</span>
+                <p class="field-desc">{{ field.description }}</p>
+              </div>
             </div>
-            <p class="field-desc">{{ field.description }}</p>
             <div v-if="field.nested?.length" class="schema-nested">
               <div
                 v-for="n in field.nested"
                 :key="n.name"
                 class="schema-nested-field"
               >
-                <code>{{ n.name }}</code>
-                <span class="field-type">{{ n.type }}</span>
-                <span class="field-desc-inline">— {{ n.description }}</span>
+                <span class="field-name-wrap"><code>{{ n.name }}</code></span>
+                <div class="field-meta">
+                  <span class="field-type">{{ n.type }}</span>
+                  <p class="field-desc">{{ n.description }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -121,19 +133,22 @@ function getResponseClass(code: number): string {
   </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
 .content {
   flex: 1;
   min-width: 0;
   padding: 2rem 2.5rem;
   background: var(--content-bg);
-}
 
-.content-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100%;
+  &-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+  }
 }
 
 .empty-message {
@@ -158,19 +173,14 @@ function getResponseClass(code: number): string {
   padding: 0.25rem 0.55rem;
   border-radius: 6px;
   letter-spacing: 0.02em;
+  @include method-badges;
 }
-
-.method-badge.get { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-.method-badge.post { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-.method-badge.put { background: rgba(249, 115, 22, 0.2); color: #f97316; }
-.method-badge.delete { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-.method-badge.patch { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
 
 .endpoint-path {
   font-size: 0.95rem;
   font-weight: 600;
   margin: 0;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: $font-mono;
   letter-spacing: -0.02em;
   word-break: break-all;
 }
@@ -191,21 +201,18 @@ function getResponseClass(code: number): string {
 
 .section {
   margin-bottom: 2.25rem;
-}
 
-.section-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin: 0 0 1rem;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
+  &-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
 }
 
 .params-table {
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  @include bordered-block;
 }
 
 .params-row {
@@ -215,24 +222,21 @@ function getResponseClass(code: number): string {
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
   border-bottom: 1px solid var(--border-color);
-}
 
-.params-row:last-child {
-  border-bottom: none;
-}
+  &:last-child {
+    border-bottom: none;
+  }
 
-.params-header {
-  background: var(--table-header-bg);
-  font-weight: 600;
-  color: var(--text-muted);
-}
+  &.params-header {
+    background: var(--table-header-bg);
+    font-weight: 600;
+    color: var(--text-muted);
+  }
 
-.params-row code {
-  background: var(--code-bg);
-  padding: 0.15rem 0.4rem;
-  border-radius: 5px;
-  font-size: 0.8em;
-  font-family: 'JetBrains Mono', monospace;
+  code {
+    @include code-inline;
+    font-size: 0.8em;
+  }
 }
 
 .required {
@@ -256,82 +260,120 @@ function getResponseClass(code: number): string {
 .response-code {
   font-weight: 600;
   min-width: 3rem;
+
+  &.success {
+    color: #22c55e;
+  }
+
+  &.client-error {
+    color: #ef4444;
+  }
+
+  &.server-error {
+    color: #dc2626;
+  }
 }
 
-.response-code.success { color: #22c55e; }
-.response-code.client-error { color: #ef4444; }
-.response-code.server-error { color: #dc2626; }
-
 .schema-block {
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  @include bordered-block;
 }
 
 .schema-field {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
-.schema-field:last-child {
-  border-bottom: none;
+.field-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 2rem;
+  align-items: start;
+  margin-bottom: 20px;
 }
 
-.schema-field-main {
-  display: flex;
+.field-name-wrap {
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: 0.25rem;
+  min-width: 6rem;
+
+  code {
+    font-weight: 600;
+    @include code-inline;
+    font-size: 0.9em;
+  }
 }
 
-.field-name {
-  font-weight: 600;
-  background: var(--code-bg);
-  padding: 0.15rem 0.4rem;
-  border-radius: 5px;
-  font-size: 0.9em;
-  font-family: 'JetBrains Mono', monospace;
+.field-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
 }
 
 .field-type {
   font-size: 0.8rem;
   color: var(--text-muted);
+  line-height: 1.4;
 }
 
 .field-desc {
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-size: 0.875rem;
   color: var(--text-secondary);
   line-height: 1.5;
 }
 
 .schema-nested {
-  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   padding-left: 1rem;
   border-left: 3px solid var(--accent);
   opacity: 0.9;
 }
 
 .schema-nested-field {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1rem;
+  align-items: start;
   font-size: 0.85rem;
   margin-bottom: 0.5rem;
   line-height: 1.5;
-}
 
-.schema-nested-field:last-child {
-  margin-bottom: 0;
-}
+  &:last-child {
+    margin-bottom: 0;
+  }
 
-.schema-nested-field code {
-  background: var(--code-bg);
-  padding: 0.1rem 0.3rem;
-  border-radius: 5px;
-  font-size: 0.85em;
-  font-family: 'JetBrains Mono', monospace;
-}
+  .field-name-wrap {
+    min-width: 6rem;
 
-.field-desc-inline {
-  color: var(--text-secondary);
+    code {
+      @include code-inline;
+      font-size: 0.85em;
+    }
+  }
+
+  .field-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .field-type {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .field-desc {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
 }
 </style>

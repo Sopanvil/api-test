@@ -66,10 +66,13 @@ const filteredSections = computed((): ApiSection[] => {
   </aside>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
 .sidebar {
-  width: 380px;
-  min-width: 380px;
+  width: $sidebar-width;
+  min-width: $sidebar-width;
   flex-shrink: 0;
   min-height: 0;
   display: flex;
@@ -77,14 +80,20 @@ const filteredSections = computed((): ApiSection[] => {
   background: var(--sidebar-bg);
   border-right: 1px solid var(--border-color);
   overflow: hidden;
-}
 
-.sidebar-search {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border-color);
-  flex-shrink: 0;
-}
+  &-search {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+  }
 
+  &-nav {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 1rem 1.25rem;
+  }
+}
 
 .search-input {
   width: 100%;
@@ -97,35 +106,28 @@ const filteredSections = computed((): ApiSection[] => {
   border-radius: var(--radius-md);
   outline: none;
   transition: border-color 0.2s;
-}
 
-.search-input::placeholder {
-  color: var(--text-muted);
-}
+  &::placeholder {
+    color: var(--text-muted);
+  }
 
-.search-input:focus {
-  border-color: var(--accent);
-}
-
-.sidebar-nav {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding: 1rem 1.25rem;
+  &:focus {
+    border-color: var(--accent);
+  }
 }
 
 .nav-section {
   margin-bottom: 1.75rem;
-}
 
-.nav-section-title {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  padding: 0 1.25rem;
-  margin-bottom: 0.6rem;
+  &-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    padding: 0 1.25rem;
+    margin-bottom: 0.6rem;
+  }
 }
 
 .nav-link {
@@ -144,16 +146,16 @@ const filteredSections = computed((): ApiSection[] => {
   text-align: left;
   border-radius: var(--radius-md);
   transition: all 0.2s ease;
-}
 
-.nav-link:hover {
-  background: var(--hover-bg);
-  color: var(--text-primary);
-}
+  &:hover {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+  }
 
-.nav-link.active {
-  background: var(--active-bg);
-  color: var(--accent);
+  &.active {
+    background: var(--active-bg);
+    color: var(--accent);
+  }
 }
 
 .method {
@@ -163,13 +165,8 @@ const filteredSections = computed((): ApiSection[] => {
   border-radius: 5px;
   flex-shrink: 0;
   letter-spacing: 0.02em;
+  @include method-badges;
 }
-
-.method.get { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-.method.post { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-.method.put { background: rgba(249, 115, 22, 0.2); color: #f97316; }
-.method.delete { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-.method.patch { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
 
 .nav-link-text {
   flex: 1;
@@ -177,20 +174,20 @@ const filteredSections = computed((): ApiSection[] => {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-}
 
-.summary {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: inherit;
-  line-height: 1.3;
-}
+  .summary {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: inherit;
+    line-height: 1.3;
+  }
 
-.path {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  .path {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 </style>
