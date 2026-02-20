@@ -1,10 +1,11 @@
+@use 'sass:list';
 @use 'variables' as *;
 
 @mixin method-badges {
   @each $method, $colors in $method-colors {
     &.#{$method} {
-      background: nth($colors, 2);
-      color: nth($colors, 1);
+      background: list.nth($colors, 2);
+      color: list.nth($colors, 1);
     }
   }
 }

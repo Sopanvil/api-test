@@ -279,6 +279,9 @@ function getResponseClass(code: number): string {
 }
 
 .schema-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
 
@@ -292,7 +295,6 @@ function getResponseClass(code: number): string {
   grid-template-columns: auto 1fr;
   gap: 0 2rem;
   align-items: start;
-  margin-bottom: 20px;
 }
 
 .field-name-wrap {
