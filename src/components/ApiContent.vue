@@ -126,7 +126,6 @@ function getResponseClass(code: number): string {
   flex: 1;
   min-width: 0;
   padding: 2rem 2.5rem;
-  overflow-y: auto;
   background: var(--content-bg);
 }
 
@@ -134,6 +133,7 @@ function getResponseClass(code: number): string {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100%;
 }
 
 .empty-message {

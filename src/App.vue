@@ -33,17 +33,20 @@ function selectEndpoint(id: string) {
     </header>
     <div class="app-body">
       <ApiSidebar :active-endpoint-id="activeEndpointId" @select="selectEndpoint" />
-      <ApiContent :endpoint="currentEndpoint" :section-id="currentSectionId" />
-      <ApiExamples :endpoint="currentEndpoint" />
+      <div class="app-main">
+        <ApiContent :endpoint="currentEndpoint" :section-id="currentSectionId" />
+        <ApiExamples :endpoint="currentEndpoint" />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .app {
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .app-header {
@@ -68,6 +71,17 @@ function selectEndpoint(id: string) {
 .app-body {
   display: flex;
   flex: 1;
+  min-height: 0;
   overflow: hidden;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  overflow-y: auto;
 }
 </style>

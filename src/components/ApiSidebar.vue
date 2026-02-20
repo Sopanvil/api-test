@@ -70,12 +70,13 @@ const filteredSections = computed((): ApiSection[] => {
 .sidebar {
   width: 380px;
   min-width: 380px;
+  flex-shrink: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--border-color);
-  overflow-y: auto;
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar-search {
@@ -83,6 +84,7 @@ const filteredSections = computed((): ApiSection[] => {
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
 }
+
 
 .search-input {
   width: 100%;
@@ -106,7 +108,10 @@ const filteredSections = computed((): ApiSection[] => {
 }
 
 .sidebar-nav {
-  padding: 1.5rem 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem 1.25rem;
 }
 
 .nav-section {
@@ -129,7 +134,6 @@ const filteredSections = computed((): ApiSection[] => {
   gap: 0.6rem;
   width: 100%;
   padding: 0.6rem 1.25rem;
-  margin: 0 0.75rem;
   color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 500;

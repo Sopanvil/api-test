@@ -30,14 +30,12 @@ defineProps<{
 .examples {
   width: 380px;
   min-width: 380px;
+  flex-shrink: 0;
   background: var(--examples-bg);
   border-left: 1px solid var(--border-color);
-  overflow-y: auto;
 }
 
 .examples-sticky {
-  position: sticky;
-  top: 0;
   padding: 2rem 1.5rem;
 }
 
